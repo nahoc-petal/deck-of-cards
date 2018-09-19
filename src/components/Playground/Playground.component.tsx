@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { shuffleArray } from './../utils/utils';
-import { Card, ICard, Suit } from './Card';
-import { CardCount } from './CardCount'; 
-import { Notification } from './Notification';
+import { shuffleArray } from '../../utils/utils';
+import { Card, ICard, Suit } from '../Card/Card.component';
+import { CardCount } from '../CardCount/CardCount.component'; 
+import { Notification } from '../Notification/Notification.component';
+import './Playground.style.css';
 
 interface IPlaygroundState {
   amountOfCardsRemaining: number,
@@ -58,7 +59,7 @@ class Playground extends React.Component<any, IPlaygroundState> {
 
         <section className='section'>
           <button
-            className='button is-primary is-medium'
+            className='button is-medium'
             disabled={shuffled}
             onClick={this.shuffleDeck}
           >
@@ -67,10 +68,7 @@ class Playground extends React.Component<any, IPlaygroundState> {
 
           {amountOfCardsRemaining > 0 ? 
             <button
-              className='button is-primary is-medium'
-              style={{
-                marginLeft: '1rem'
-              }}
+              className='button is-primary is-medium is-deal'
               disabled={!shuffled}
               onClick={this.dealOneCard}
             >

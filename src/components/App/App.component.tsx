@@ -1,18 +1,12 @@
 import * as React from 'react';
-import Playground from './Playground'; 
+import Playground from './../Playground/Playground.component'; 
+import './App.style.css';
 
 class App extends React.Component<any, any> {
 
   public render(): React.ReactNode {
-
     return (
-      <div className="has-text-centered" style={{
-        display: 'flex',
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        minHeight: '100vh',
-      }}>
+      <div className="app has-text-centered">
         <section className="hero is-light">
           <div className="hero-body">
             <div className="container">

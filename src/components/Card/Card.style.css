@@ -1,0 +1,22 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 14rem;
+  min-height: 20rem;
+  position: relative;
+}
+
+.rank {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.rank-reverse {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  transform: rotate(180deg);
+}

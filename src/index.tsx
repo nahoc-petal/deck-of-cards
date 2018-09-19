@@ -1,7 +1,7 @@
 import 'bulma/css/bulma.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './components/App/App.component';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
