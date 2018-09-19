@@ -30,8 +30,8 @@ describe("Card", () => {
     expect(divs.length).toBeGreaterThan(0);
   });
 
-  it("always renders a `h2`", () => {
-    expect(card().find("h2").length).toBe(1);
+  it("always renders two `h2`", () => {
+    expect(card().find("h2").length).toBe(2);
   });
 
   it("always renders a `img`", () => {
