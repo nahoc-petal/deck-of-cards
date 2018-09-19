@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from './../components/Card';
+import { Card } from '../components/Card';
 import { shuffleArray } from '../helpers/shuffleArray'
 
 class App extends Component {
@@ -8,16 +8,15 @@ class App extends Component {
     ranks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     suits: ['club', 'diamond', 'heart', 'spade'],
     deck: [],
-    dealtCard: {
-      rank: null,
-      suit: ''
-    },
+    dealtCard: null,
     amountOfCardsRemaining: 52,
+    shuffled: false,
   };
 
   componentWillMount() {    
     this.initDeck();
   }
+
 
   initDeck = () => {
     const { ranks, suits } = this.state;
@@ -34,10 +33,11 @@ class App extends Component {
     });
   }
 
-  shuffle = () => {
+  shuffleDeck = () => {
     const { deck } = this.state;
     const deckShuffled = shuffleArray(deck);
     this.setDeck(deckShuffled);
+    this.setShuffled();
   }
 
   removeCardFromDeck = (index) => {
@@ -49,6 +49,12 @@ class App extends Component {
   setDeck = (deck) => {
     this.setState({
       deck
+    });
+  }
+
+  setShuffled = () => {
+    this.setState({
+      shuffled: true
     });
   }
 
@@ -73,62 +79,67 @@ class App extends Component {
     this.setAmountOfCardsRemaining();
   }
 
-  logState = () => {
-    console.log(this.state);
-  }
-
   render() {
-    const { dealtCard, amountOfCardsRemaining } = this.state;
+    const { dealtCard, amountOfCardsRemaining, shuffled } = this.state;
 
     return (
-      <div className="container has-text-centered">
-
+      <div className="has-text-centered">
+        <section className="hero is-light">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">
+                Card Picker
+              </h1>
+              <h2 className="subtitle">
+                Pick a card, any card.
+              </h2>
+            </div>
+          </div>
+        </section>
+        <section className='section'>
           {dealtCard ?
-            <section className='section'>
-              <Card 
-                rank={dealtCard.rank}
-                suit={dealtCard.suit}
-              />
-            </section>
+            <Card 
+              rank={dealtCard.rank}
+              suit={dealtCard.suit}
+            />
           : null}
+        </section>
 
-          <section className='section'>
-            <button
-              className='button is-primary'
-              style={{
-                marginRight: '1rem'
-              }}
-              onClick={this.logState}
-            >
-              Log state
-            </button>
-            
-            <button
-              className='button is-primary is-medium'
-              style={{
-                marginRight: '1rem'
-              }}
-              onClick={this.shuffle}
-            >
-              Reshuffle Deck
-            </button>
+        {!dealtCard && shuffled ?
+          <div className="container notification is-success">
+            Cards shuffled! Try dealing one card.
+          </div>
+        : null}
 
-            <button
-              className='button is-primary is-medium'
-              style={{
-                marginRight: '1rem'
-              }}
-              onClick={this.dealOneCard}
-            >
-              Deal One Card
-            </button>
-          </section>
+        <section className='section'>
+          <button
+            className='button is-primary is-medium'
+            style={{
+              marginRight: '1rem'
+            }}
+            disabled={shuffled}
+            onClick={this.shuffleDeck}
+          >
+            Shuffle Deck
+          </button>
 
-          <section className='section'>
-            <h6 className='subtitle'>
-              {amountOfCardsRemaining === 0 ? 'No more cards remaining.' : `Cards remaining: ${amountOfCardsRemaining}`}
-            </h6>
-          </section>
+          <button
+            className='button is-primary is-medium'
+            style={{
+              marginRight: '1rem'
+            }}
+            disabled={!shuffled}
+            onClick={this.dealOneCard}
+          >
+            Deal One Card
+          </button>
+        </section>
+
+        <section className='section'>
+          <h6 className='subtitle'>
+            {amountOfCardsRemaining === 0 ? 'No more cards remaining.' : `Cards remaining: ${amountOfCardsRemaining}`}
+          </h6>
+        </section>
       </div>
     );
   }
