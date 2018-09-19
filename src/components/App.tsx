@@ -109,8 +109,8 @@ class App extends React.Component<any, IAppState> {
     let deckUnshuffled: ICard[] = [];
     suits.forEach((suit) => {
       let i: number = 0;
-      const array: number[] = Array(13);
-      deckUnshuffled = deckUnshuffled.concat(array.map(() => ({
+      const arr: number[] = new Array(13);
+      deckUnshuffled = deckUnshuffled.concat(arr.fill(0).map(() => ({
         rank: ranks[i++],
         suit,
       })));
@@ -127,7 +127,6 @@ class App extends React.Component<any, IAppState> {
   private shuffleDeck = (): void => {
     const { deck } = this.state;
     const deckShuffled = shuffleArray(deck);
-    console.log(deck);
     this.setDeck(deckShuffled);
     this.setShuffledToTrue();
   }
